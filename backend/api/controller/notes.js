@@ -59,7 +59,7 @@ const updateNote = (req, res) => {
     });
 };
 
-const deleteUser = (req, res) => {
+const deleteNote = (req, res) => {
     const { id } = req.params;
     const sql = 'DELETE FROM notes WHERE id = ?'
 
@@ -74,4 +74,4 @@ const deleteUser = (req, res) => {
     })
 }
 
-export default { getNotes, getNotesById, createNote, updateNote, deleteUser }
+export default { getNotes, getNotesById, createNote, updateNote, deleteNote }

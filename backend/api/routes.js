@@ -18,6 +18,6 @@ router.get('/notes', Notes.getNotes);
 router.get('/notes/:id', Notes.getNotesById);
 router.post('/notes', Notes.createNote);
 router.put('/notes/:id', Notes.updateNote);
-router.delete('/notes/:id', Notes.deleteUser);
+router.delete('/notes/:id', Notes.deleteNote);
 
 export default router;
