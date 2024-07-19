@@ -1,5 +1,5 @@
 import Connection from '../../database/db.js'
-
+import bcrypt from 'bcryptjs'
 const db = new Connection();
 
 const getUsers = (req, res) => {
@@ -29,9 +29,11 @@ const getUserById = (req, res) => {
 
 const createUser = (req, res) => {
     const { nome, email, senha } = req.body;
+    const hashedPassword = bcrypt.hashSync(senha, 8)
     const sql = 'INSERT INTO user (nome, email, senha) VALUES (?, ?, ?)';
+    
 
-    db.query(sql, [nome, email, senha], (err, result) => {
+    db.query(sql, [nome, email, hashedPassword], (err, result) => {
         if (err) {
             console.error('Error creating user:', err);
             return res.status(500).json(err);
@@ -41,7 +43,7 @@ const createUser = (req, res) => {
             id: result.insertId,
             nome,
             email,
-            senha
+            hashedPassword
         });
     });
 };
@@ -81,7 +83,7 @@ const deleteUser = (req, res) => {
     })
 }
 
+
+
 export default { getUsers, createUser, getUserById, updateUser, deleteUser };
 
-//mudar as alterações do gpt e terminar del
-//ver o erro
