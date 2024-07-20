@@ -1,9 +1,13 @@
-import LoginForm from "../components/Login/Registro/LoginForm";
+import LoginForm from "../components/Login/Registro/LoginForm.jsx";
+import axios from 'axios'
+import { useEffect, useState } from "react";
 
 const Login = () => {
+  
+
     return (
         <div className="Login">
-            <h1>Login</h1>
+         
             <LoginForm />
         </div>
     )
