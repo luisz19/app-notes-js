@@ -22,6 +22,7 @@ const RegistroForm = () => {
 
         .then((res) => {
             console.log(res)
+            
         })
 
         .catch((err) => {

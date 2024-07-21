@@ -8,7 +8,7 @@ const LoginForm = () => {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState()
     const [token, setToken] = useState();
-    const [error, setError] = useState('');
+    const [error, setError] = useState('')
 
     const postLogin = async (e) => {
         e.preventDefault()
