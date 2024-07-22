@@ -1,0 +1,20 @@
+.header {
+    background-color: #557da2;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+    gap: 25%;
+    padding: 15px;
+    -webkit-box-shadow: 0px 6px 18px 0px rgba(0,0,0,0.31);
+    -moz-box-shadow: 0px 6px 18px 0px rgba(0,0,0,0.31);
+    box-shadow: 0px 6px 18px 0px rgba(0,0,0,0.31);
+}
+
+.header input {
+    margin-bottom: 8px;
+    padding: 7px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    background-color: #b6cbde;
+}

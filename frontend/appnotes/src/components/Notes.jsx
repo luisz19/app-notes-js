@@ -1,12 +1,15 @@
 const Notes = ({notes}) => {
 
     return (
-        <div>
+        <div className="Notes">
             {notes.map((note, index) => 
-                <div key={note.id ? note.id : index}>
-                    <p>{note.titulo}</p>
-                    <p>{note.assunto}</p>
-                    <p>{note.user_id}</p>
+                <div className="individualNote" key={note.id ? note.id : index}>
+                    <p className="title">{note.titulo}</p>
+                    <p className="content">{note.assunto}</p>
+                    <div className="actions">
+                        <button>actions</button>
+                        <button>actions</button>
+                    </div>
                 </div>
     
             )}

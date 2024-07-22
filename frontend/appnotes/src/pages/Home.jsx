@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Notes from '../components/Notes.jsx'
+import Header from "../components/Header.jsx";
 
 
 const Home = () => {
@@ -36,6 +37,11 @@ const Home = () => {
 
     return (
         <>
+            <Header />
+            <div className="container-create-note">
+                <h1 className="notesTitle">Notes</h1>
+                <button>+</button>
+            </div>
             <Notes notes={notes}/>
         </>
     )

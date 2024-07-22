@@ -4,6 +4,8 @@ import App from './App.jsx'
 import './styles/index.css'
 import './styles/App.css'
 import './styles/login.css'
+import './styles/header.css'
+import './styles/notes.css'
 
 
 ReactDOM.createRoot(document.getElementById('root')).render(
