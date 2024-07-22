@@ -6,9 +6,13 @@ import Header from "../components/Header.jsx";
 
 const Home = () => {
     const url = 'http://localhost:8080'
-    const [notes, setNotes] = useState([])
-   
-    const getNotes = async({token, userId}) => {
+    const [notes, setNotes] = useState([]);
+    const token = localStorage.getItem('Token')
+    const userId = localStorage.getItem('UserId')
+    
+
+
+    const getNotes = async() => {
 
         await axios.get(`${url}/user/${userId}/notes`, {
             headers: {
@@ -17,7 +21,6 @@ const Home = () => {
         })
         
         .then(res => {
-            console.log(res)
             setNotes(res.data)
 
         })
@@ -26,13 +29,23 @@ const Home = () => {
         })
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem('Token')
-        const userId = localStorage.getItem('UserId')
-        
-        getNotes({token, userId})
+    const deleteNotes = async(id) => {
+        await axios.delete(`${url}/notes/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+           }
+        })
+      
+    }
 
-    }, [])
+    useEffect(() => {
+    
+        getNotes()
+
+    }, [notes])
+
+  
+   
 
 
     return (
@@ -42,7 +55,7 @@ const Home = () => {
                 <h1 className="notesTitle">Notes</h1>
                 <button>+</button>
             </div>
-            <Notes notes={notes}/>
+            <Notes notes={notes} deleteNotes={deleteNotes}/>
         </>
     )
 }

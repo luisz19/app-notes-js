@@ -1,14 +1,14 @@
-const Notes = ({notes}) => {
+const Notes = ({notes ,deleteNotes} ) => {
 
     return (
         <div className="Notes">
-            {notes.map((note, index) => 
-                <div className="individualNote" key={note.id ? note.id : index}>
+            {notes.map((note) => 
+                <div className="individualNote" key={note.id}>
                     <p className="title">{note.titulo}</p>
                     <p className="content">{note.assunto}</p>
                     <div className="actions">
-                        <button>actions</button>
-                        <button>actions</button>
+                        <button>editar</button>
+                        <button onClick={() => deleteNotes(note.id)}>apagar</button>
                     </div>
                 </div>
     
