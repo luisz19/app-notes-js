@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {useNavigate} from 'react-router-dom'
+
 
 const LoginForm = () => {
     const url = 'http://localhost:8080'
-    const [userId, setUserId] = useState([]);
+    const [userId, setUserId] = useState('');
     const [email, setEmail] = useState('')
-    const [senha, setSenha] = useState()
-    const [token, setToken] = useState();
+    const [senha, setSenha] = useState('')
+    const [token, setToken] = useState('');
     const [error, setError] = useState('')
+    const navigate = useNavigate()
 
     const postLogin = async (e) => {
         e.preventDefault()
@@ -26,6 +29,8 @@ const LoginForm = () => {
             setUserId(res.data.userId)
             localStorage.setItem('UserId', userId)
             localStorage.setItem('Token', token)
+            
+      
                 
         })
 
