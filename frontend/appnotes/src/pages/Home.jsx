@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import Notes from '../components/Notes.jsx'
 import Header from "../components/Header.jsx";
 import CreateNote from "../components/CreateNote.jsx";
-import Search from "../pages/Search.jsx";
-
+import Modal from "../components/Modal.jsx";
+import ModalUpdate from "../components/ModalUpdate.jsx";
 
 const Home = () => {
     const url = 'http://localhost:8080'
@@ -12,6 +12,12 @@ const Home = () => {
     const [titulo, setTitulo] = useState('');
     const token = localStorage.getItem('Token')
     const userId = localStorage.getItem('UserId')
+    const [noteId, setNoteId] = useState('');
+    const [trigger, setTrigger] = useState(false);
+    const [click, setClick] = useState(0)
+    const [novoTitulo, setNovoTitulo] = useState('');
+    const [assunto, setAssunto] = useState('');
+    
     const [showContainer, setShowContainer] = useState(false)
     
 
@@ -20,6 +26,11 @@ const Home = () => {
         setShowContainer(false)
         getSearch()
 
+    }
+
+    const Clicked = () => {
+        setClick(click + 1)
+        console.log(click)
     }
 
     const getSearch = async () => {
@@ -47,6 +58,62 @@ const Home = () => {
        
     }
 
+    const modalNote = (id) => {
+       
+       
+        setNoteId(id)
+        console.log(noteId)
+
+    }
+
+    const updateNotes = async() => {
+         await axios.put(`${url}/notes/${noteId}`, 
+                {
+                    user_id: userId,
+                    titulo: novoTitulo,
+                    assunto: assunto
+                },
+                {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            
+            },
+        )
+
+        .then(res => {
+            console.log(res)
+            setNoteId(false)
+            getNotes()
+            
+        })
+    }
+
+    const createNote = async() => {
+        await axios.post(`${url}/notes`, 
+               {
+                   user_id: userId,
+                   titulo: novoTitulo,
+                   assunto: assunto
+               },
+               {
+               headers: {
+                   Authorization: `Bearer ${token}`
+               }
+           
+           },
+       )
+
+       .then(res => {
+           console.log(res)
+           getNotes()
+           setClick(false)
+           
+       })
+   }
+
+    //fazer update
+
     const getNotes = async() => {
 
         await axios.get(`${url}/user/${userId}/notes`, {
@@ -57,6 +124,7 @@ const Home = () => {
         
         .then(res => {
             setNotes(res.data)
+        
 
         })
         .catch(err => {
@@ -70,6 +138,13 @@ const Home = () => {
                 Authorization: `Bearer ${token}`
            }
         })
+        .then(res => {
+            console.log(res)
+            getNotes()
+        })
+        .catch(err => {
+            console.error(err)
+        })
       
     }
 
@@ -80,17 +155,23 @@ const Home = () => {
         }
         
 
-    }, [notes])
-
-  
-   
-
+    }, [trigger])
 
     return (
         <>
-            <Header titulo={titulo} setTitulo={setTitulo} handleSubmit={handleSubmit}/>
-            <CreateNote />
-            <Notes notes={notes} deleteNotes={deleteNotes}/>
+            <Header titulo={titulo} setTitulo={setTitulo} handleSubmit={handleSubmit} />
+            <CreateNote Clicked={Clicked}/>
+
+            {/* modal para criar nota */}
+            {click && <Modal novoTitulo={novoTitulo} setTitulo={setNovoTitulo} 
+            assunto={assunto} setAssunto={setAssunto} createNote={createNote}/>}
+
+            {/* modal para atualizar nota */}
+            {noteId && <ModalUpdate
+            novoTitulo={novoTitulo} setTitulo={setNovoTitulo} 
+            assunto={assunto} setAssunto={setAssunto} updateNotes={updateNotes}/>}
+
+            <Notes notes={notes} deleteNotes={deleteNotes} modalNote={modalNote} />
         </>
     )
 }

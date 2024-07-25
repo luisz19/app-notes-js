@@ -27,8 +27,9 @@ const LoginForm = () => {
             console.log(res.data)
             setToken(res.data.token)
             setUserId(res.data.userId)
-            localStorage.setItem('UserId', userId)
-            localStorage.setItem('Token', token)
+            localStorage.setItem('UserId', res.data.userId)
+            localStorage.setItem('Token', res.data.token)
+            navigate('/notes')
             
       
                 
@@ -46,13 +47,13 @@ const LoginForm = () => {
     return (
         <div className="LoginForm">
                <h1>Login</h1>
-            <form>
+            <form onSubmit={postLogin}>
                 <label htmlFor="email">Email:</label>
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} id="email"  required />
                 <label htmlFor="senha">Senha:</label>
                 <input type="password" placeholder="Senha" value={senha} onChange={(e) => setSenha(e.target.value)} id="senha"   required />
 
-                <button onClick={postLogin}>Entrar</button>
+                <button >Entrar</button>
 
                 <p>{error}</p>
 

@@ -1,4 +1,4 @@
-const Notes = ({notes ,deleteNotes} ) => {
+const Notes = ({notes ,deleteNotes, modalNote} ) => {
 
     return (
         <div className="Notes">
@@ -7,8 +7,8 @@ const Notes = ({notes ,deleteNotes} ) => {
                     <p className="title">{note.titulo}</p>
                     <p className="content">{note.assunto}</p>
                     <div className="actions">
-                        <button>editar</button>
-                        <button onClick={() => deleteNotes(note.id)}>apagar</button>
+                        <button onClick={() => modalNote(note.id)}>Editar</button>
+                        <button onClick={() => deleteNotes(note.id)}>Apagar</button>
                     </div>
                 </div>
     

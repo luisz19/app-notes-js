@@ -17,6 +17,22 @@
     
 }
 
+.container-create-note button {
+    height: 30px;
+    font-size: 1.05rem;
+    padding: 0 7px;
+    background-color: #87a6c2;
+    border: none;
+    color: white;
+    font-weight: 500;
+    border-radius: 4px;
+    
+}
+
+.content{
+    padding: 3px 0 5px;
+}
+
 h1.notesTitle {
     padding-left: 10px ;
     padding-bottom: 5px;
@@ -47,8 +63,25 @@ box-shadow: 0px 6px 18px 0px rgba(0,0,0,0.31);
 }
 
 .individualNote p {
-    overflow: hidden; /* Oculta qualquer conteúdo que ultrapasse a largura máxima */
-    text-overflow: ellipsis; /* Adiciona "..." no final do texto que ultrapassa a largura máxima */
+    overflow: hidden; 
+    text-overflow: ellipsis; 
     word-wrap: break-word;
+}
+
+.actions {
+    width: 100%;
+    display: flex;
+    gap: 5px;
+}
+
+.actions button {
+    width: 50%;
+   color: white;
+    padding: 6px;
+    margin-top: 10px;
+    background-color: #87a6c2;
+    border: none;
+    border-radius: 5px;
+
 }
 
